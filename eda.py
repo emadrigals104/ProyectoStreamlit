@@ -148,7 +148,7 @@ def eda():
             fig_hist.update_layout(
                 title=f"Histograma - {seleccion_grafica_nume}",
                 xaxis_title=seleccion_grafica_nume,
-                yaxis_title="Conteo",
+                yaxis_title="Frecuencia",
                 font=dict(size=12),
                 width=500,
                 height=500
