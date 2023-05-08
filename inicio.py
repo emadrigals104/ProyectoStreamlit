@@ -35,7 +35,7 @@ def cargar_archivo():
     col1, col2, col3 = st.columns([1, 2, 1])
 
     with col2:
-        gif = Image.open("images\servicio-al-cliente.png")
+        gif = Image.open("images/servicio-al-cliente.png")
         st.image(gif, width=300)
     st.markdown("### :open_file_folder: Sube al archivo que vas a entrenar")
     uploaded_file = st.file_uploader("Cargue su archivo CSV", type=["csv"])
