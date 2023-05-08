@@ -1,0 +1,22 @@
+[data-testid="stSidebar"] {
+                background-image: url(https://process.fs.teachablecdn.com/ADNupMnWyR7kCWRvm76Laz/resize=height:60/https://www.filepicker.io/api/file/5lxbxQORvq9G3owTPKQu);
+                background-size: 100px;
+                background-repeat: no-repeat;
+                background-position: 4px 20px;
+            }
+
+div.css-j5r0tf.e1tzin5v1 {
+    background-color:rgb(0, 20, 110)4 ;
+    border: 1px solid#ac732d
+    ;
+    padding: 2% 2% 2% 5%;
+    border-radius: 5px;
+    
+    border-left: 0.5rem solid #c76f10 !important;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
+    
+}
+
+p,li{
+    font-size: 18px;
+}
