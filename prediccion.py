@@ -22,9 +22,11 @@ def columnas():
                     data=st.session_state.data_entre
                     columnas = data.columns
                     st.session_state.columnas_actualizadas = False
+        return columnas
     else:
-      st.markdown("## No existen Columnas, debes entrenar el modelo")  
-    return columnas
+      st.markdown("## No existen Columnas, debes entrenar el modelo")
+      return None  
+    
 
 def to_excel(df):
     output = BytesIO()
