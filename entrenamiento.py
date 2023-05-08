@@ -34,7 +34,7 @@ def entrenamiento():
     if "data" not in st.session_state:
         st.image("images/upload-cloud-data.png", width=300)
         st.write("Debe Ingresar el dataset primero, Dirijase a la pagina principal.") 
-        st.write("Si ya lo subió debe dirigirse a Preprocesamiento")
+        st.write("Si ya lo subió debe dirigirse a Preprocesamiento y Puede Ingresar a entrenar el modelo")
     else:
         if "data_entre" not in st.session_state:
             st.session_state.data_entre = st.session_state.predf.copy()
