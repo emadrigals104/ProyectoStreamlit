@@ -166,7 +166,8 @@ def entrenamiento():
                 st.success("Modelo Guardado Correctamente")
     
     else: 
-        st.markdown("Hola")
+        st.image("images/upload-cloud-data.png", width=300)
+        st.warning("Debe realizar el preprocesamiento antes de entrenar")
 
         
             
