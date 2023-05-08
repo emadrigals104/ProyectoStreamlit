@@ -8,7 +8,8 @@ def preprocesamiento():
     
 
     st.markdown("# Preprocesamiento de Datos")
-
+    if "preprocessing_done" not in st.session_state:
+        st.session_state.preprocessing_done = False
 
     if "df" not in st.session_state:
         st.image("images/upload-cloud-data.png", width=300)
@@ -157,6 +158,8 @@ def preprocesamiento():
             st.session_state.data["TotalRecargo"] = scaler.transform(st.session_state.data[["TotalRecargo"]])
             scaler = StandardScaler().fit(st.session_state.data[["RecargoMensual"]])
             st.session_state.data["RecargoMensual"] = scaler.transform(st.session_state.data[["RecargoMensual"]])
+            st.session_state.predf = st.session_state.data
+            st.session_state.preprocessing_done = True
  
             
         
