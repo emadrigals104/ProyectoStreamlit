@@ -27,15 +27,15 @@ def convert_model_to_bytes(model):
 
     
 def entrenamiento():
-    st.markdown("# :bar_chart: Preprocesamiento de Datos")
+    st.markdown("# :bar_chart: Entrenamiento de Datos")
     
     import pandas as pd
     
     if "data" not in st.session_state:
         st.image("images/upload-cloud-data.png", width=300)
-        st.write("Debe Ingresar el dataset primero, Dirijase a la pagina principal.") 
-        st.write("Si ya lo subió debe dirigirse a Preprocesamiento y Puede Ingresar a entrenar el modelo")
-    else:
+        st.write("Debe Ingresar el dataset primero, Dirijase a la pagina principal.")
+    
+    elif st.session_state.preprocessing_done:
         if "data_entre" not in st.session_state:
             st.session_state.data_entre = st.session_state.predf.copy()
         data = st.session_state.data_entre
@@ -164,6 +164,9 @@ def entrenamiento():
             st.markdown("## Descarga tu modelo Entrenado")
             if st.download_button("Descargar modelo PKL", model_data, file_name="modelo_entrenado.pkl", mime="application/octet-stream"):
                 st.success("Modelo Guardado Correctamente")
+    
+    else: 
+        st.markdown("Hola")
 
         
             
