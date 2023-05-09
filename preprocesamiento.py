@@ -17,7 +17,7 @@ def preprocesamiento():
     else:
         if st.session_state.get("original_df") is None:
             st.session_state.original_df = st.session_state.df.copy()
-        st.markdown("### Si desea restablecer el dataset aplaste el botón de abajo")
+        st.markdown("### Si desea restablecer el dataset, presione el botón de abajo")
         reset_button = st.button("Restablecer Preprocesado")
         if reset_button:
             st.session_state.df = st.session_state.original_df.copy()
@@ -149,7 +149,7 @@ def preprocesamiento():
                     
                     Para que se realicen de manera automática debe pulsar el botón de aquí abajo
                     ''')
-        st.session_state.boton_pasos_no_realizados = st.button("Pulse aquí cuando haya terminado")
+        st.session_state.boton_pasos_no_realizados = st.button("Pulse aquí cuando haya terminado de Transformar los Datos")
         if st.session_state.boton_pasos_no_realizados:
             for i in st.session_state.data.select_dtypes(include='object').columns:
                 st.session_state.data[i] = LabelEncoder().fit_transform(st.session_state.data[i])
