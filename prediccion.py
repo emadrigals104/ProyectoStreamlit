@@ -10,22 +10,27 @@ import plotly.express as px
 
 
 
-@st.cache_data(persist="disk")
-def columnas():
-    if "data_entre" in st.session_state:
-        if "boton_pasos_no_realizados" in st.session_state:
-            if st.session_state.boton_pasos_no_realizados:
-                data=st.session_state.data_entre
-                columnas = data.columns
-                st.session_state.columnas_actualizadas = True
-                if st.session_state.boton_pasos_no_realizados == False:
-                    data=st.session_state.data_entre
-                    columnas = data.columns
-                    st.session_state.columnas_actualizadas = False
+def columnas(modelo):
+    columnas = None
+
+    if hasattr(modelo, "feature_names_in_"):
+        columnas = modelo.feature_names_in_
+    elif hasattr(modelo, "named_steps"):
+        for step in modelo.named_steps.values():
+            if hasattr(step, "transformers_"):
+                columnas = []
+                for _, transformer, column_indices in step.transformers_:
+                    if hasattr(transformer, "get_feature_names_out"):
+                        columnas.extend(transformer.get_feature_names_out(column_indices))
+                    else:
+                        columnas.extend(column_indices)
+                break
+
+    if columnas is not None:
+        
         return columnas
     else:
-      st.markdown("## No existen Columnas, debes entrenar el modelo")
-      return None  
+        return None
     
 
 def to_excel(df):
@@ -67,21 +72,17 @@ def prediccion():
         carga_modelo = pickle.load(modelo_entrenado)
         if datos_nuevos is not None:
             dataset_ingresado = pd.read_csv(datos_nuevos)
-            st.write(dataset_ingresado)
-            columnas_comunes = dataset_ingresado.columns.intersection(columnas())
+            if st.checkbox("Mostrar Datos Ingresados"):
+                st.write(dataset_ingresado)
+            columnas_comunes = dataset_ingresado.columns.intersection(columnas(carga_modelo))
             dataset_nuevo = dataset_ingresado[columnas_comunes]
-            if st.checkbox("Mostrar Dataset"):
+            st.divider()
+            st.markdown("### Datos a Predecir")
+            if st.checkbox("Mostrar Datos que ingresan a la Predicción"):
                 st.write(dataset_nuevo)
  
         else:
-            column = columnas()
-            boton_actualizar = st.button("Actualizar Columnas")
-            if boton_actualizar:
-                columnas.clear()
-                column = columnas()
-                if boton_actualizar == False:
-                    columnas.clear()
-                    column = columnas()
+            column = columnas(carga_modelo)
             datos_dicc = {}
             if "Genero" in column:
                 genero = st.sidebar.selectbox('Genero',("Femenino","Masculino"))
