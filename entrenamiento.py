@@ -2,7 +2,6 @@ import streamlit as st
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.svm import LinearSVC
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import confusion_matrix
@@ -42,7 +41,6 @@ def entrenamiento():
         st.markdown("### Parámetros para Entrenar el Modelo")
         modelo = st.sidebar.selectbox("Escoja el modelo:",("Clasificador de Regresión Logística",
                                                                "Clasificador K-vecinos más Cercanos",
-                                                               "Clasificador Máquinas de Soporte Vectorial",
                                                                "Clasificador de Árboles de Decisión",
                                                                "Clasificador de Bosque Aleatorio"
                                                             ))
@@ -87,28 +85,7 @@ def entrenamiento():
                 }
                 
                 modelo_entrenar = KNeighborsClassifier(n_neighbors=n_neighbors,weights=weights,algorithm=algorithm,p=p)
-            case "Clasificador Máquinas de Soporte Vectorial":
-                penalty = st.sidebar.selectbox("Penalty",("l2","l1"))
-                if penalty == "l1":
-                    loss = st.sidebar.selectbox("loss",(['squared_hinge']))
-                else:
-                    loss = st.sidebar.selectbox("loss",( 'squared_hinge','hinge'))
-                C = st.sidebar.number_input("C",min_value=0.01,max_value=100.00,value=1.0)
-                fit_intercept = st.sidebar.selectbox("Fit intercept",("True","False"))
-                if fit_intercept == "True":
-                    fit_intercept = True
-                else:
-                    fit_intercept = False
-                
-                
-                parametros={
-                    "penalty":penalty,
-                    "loss": loss,
-                    "C":C,
-                    "fit_intercept": fit_intercept
-                }
-                
-                modelo_entrenar = LinearSVC(penalty=penalty,loss=loss,C=C,fit_intercept=fit_intercept)
+
             case "Clasificador de Árboles de Decisión":
                 criterion = st.sidebar.selectbox("criterion",("gini","entropy","log_loss"))
                 splitter = st.sidebar.selectbox("splitter",("best","random"))
